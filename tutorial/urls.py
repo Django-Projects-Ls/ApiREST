@@ -17,14 +17,12 @@ Including another URLconf
 
 from django.urls import path, include
 from rest_framework import routers
-from quickstart import views
+from students import views
 
-# Routers provide an easy way of automatically determining the URL conf.
-router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
+router = routers.DefaultRouter() # Create a router instance to register our viewsets
+router.register(r'students', views.StudentViewSet)
 
 urlpatterns = [
+    path('', include(router.urls)), # This show the list of urls registered in the router
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
-
-urlpatterns += router.urls
